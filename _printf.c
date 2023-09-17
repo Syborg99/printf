@@ -12,39 +12,40 @@ int _printf(const char *format, ...)
 	int i = 0, total = 0, c_str = 0;
 	va_list pr;
 
-	if (!format)
-		return (-1);
 
 	va_start(pr, format);
 
+	if (!format || (format[0] == '%' && format[1] == '\0'))
+		return (-1);
 
-	for (; format[i] != '\0'; i++)
+	if (format[0] == '%' && format[1] == ' ' && format[2] == '\0')
+		return (-1);
+
+	for (; format && format[i] != '\0'; i++)
 	{
-		if (format[i] != '%')
-			_putchar(format[i]);
-
-		else
+		if (format[i] == '%')
 		{
-			if (format[i + 1] == '\0' || format[i + 1] == ' ')
-				return (-1);
+			i++;
 
-			else if (format[i + 1] == '%')
+			if (format[i] == '%')
 				_putchar('%');
 
-			else if (format[i + 1] == 'c')
+			else if (format[i] == 'c')
 				_putchar(va_arg(pr, int));
 
-			else if (format[i + 1] == 's')
+			else if (format[i] == 's')
 			{
 				c_str = put_str(va_arg(pr, char *));
 				total = total + (c_str - 1);
 			}
-			else
-				_putchar(format[i + 1]);
-			i++;
 		}
+		else
+			_putchar(format[i]);
+
 		total += 1;
+
 	}
+
 	va_end(pr);
 	return (total);
 }
