@@ -24,7 +24,10 @@ int _printf(const char *format, ...)
 			_putchar(format[i]);
 
 		else if (format[i + 1] == '%')
+		{
 			_putchar('%');
+			i++;
+		}
 
 		else if (format[i + 1] == 'c')
 		{
@@ -35,14 +38,11 @@ int _printf(const char *format, ...)
 		else if (format[i + 1] == 's')
 		{
 			c_str = put_str(va_arg(pr, char *));
-			total += (c_str - 1);
+			total = total + (c_str - 1);
 			i++;
 		}
 
-		else if (format[i + 1] == ' ')
-			return (-1);
-
-		total++;
+		total = total + 1;
 	}
 
 	va_end(pr);
