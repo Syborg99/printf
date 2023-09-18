@@ -17,31 +17,37 @@ int _printf(const char *format, ...)
 
 	va_start(pr, format);
 
-	for (; format[i] != '\0';)
+	if (!format || (format[0] == '%' && format[1] == '\0'))
+		return (-1);
+
+	if (format[0] == '%' && format[1] == ' ' && format[2] == '\0')
+		return (-1);
+
+	for (; format[i] != '\0'; i++)
 	{
-		if (format[i] == '%' && format[i + 1] != ' ')
+		if (format[i] == '%')
 		{
-			if (format[i + 1] == '%')
-			{
-				total += _putchar('%');
-			}
-			else if (format[i + 1] == 'c')
-			{
-				total += _putchar(va_arg(pr, int));
-			}
-			else if (format[i + 1] == 's')
+			i++;
+
+			if (format[i] == '%')
+				_putchar('%');
+
+			else if (format[i] == 'c')
+				_putchar(va_arg(pr, int));
+
+			else if (format[i] == 's')
 			{
 				c_str = put_str(va_arg(pr, char *));
-				total = total + (c_str - 1);
+				total = total + (c_str);
 			}
-			i += 2;
 		}
 		else
-		{
-			total += _putchar(format[i]);
-			i++;
-		}
+			_putchar(format[i]);
+
+		total += 1;
+
 	}
+
 	va_end(pr);
 	return (total);
 }
