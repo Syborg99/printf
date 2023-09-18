@@ -1,5 +1,4 @@
 #include "main.h"
-
 /**
  * _printf - a function that produces output
  *
@@ -21,31 +20,31 @@ int _printf(const char *format, ...)
 	if (format[0] == '%' && format[1] == ' ' && format[2] == '\0')
 		return (-1);
 
-	for (; format[i] != '\0'; i++)
+	for (; format && format[i] != '\0'; i++)
 	{
-		if (format[i] != '%')
-			total += _putchar(format[i]);
-
-		else if (format[i] == '%' && format[i + 1] != ' ')
+		if (format[i] == '%')
 		{
 			i++;
+
 			if (format[i] == '%')
-			{
-				total += _putchar('%');
-			}
+				_putchar('%');
+
 			else if (format[i] == 'c')
-			{
-				total += _putchar(va_arg(pr, int));
-			}
+				_putchar(va_arg(pr, int));
+
 			else if (format[i] == 's')
 			{
 				c_str = put_str(va_arg(pr, char *));
 				total = total + (c_str - 1);
 			}
-			else
-				total += _putchar(format[i]);
 		}
+		else
+			_putchar(format[i]);
+
+		total += 1;
+
 	}
+
 	va_end(pr);
 	return (total);
 }
