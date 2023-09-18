@@ -26,7 +26,7 @@ int _printf(const char *format, ...)
 		if (format[i] != '%')
 			total += _putchar(format[i]);
 
-		else if (format[i] == '%' && format[i] != ' ')
+		else if (format[i] == '%' && format[i + 1] != ' ')
 		{
 			i++;
 			if (format[i] == '%')
