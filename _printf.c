@@ -31,19 +31,19 @@ int _printf(const char *format, ...)
 			i++;
 			if (format[i] == '%')
 			{
-				_putchar('%');
-				total++;
+				total += _putchar('%');
 			}
 			else if (format[i] == 'c')
 			{
-				_putchar(va_arg(pr, int));
-				total++;
+				total += _putchar(va_arg(pr, int));
 			}
 			else if (format[i] == 's')
 			{
 				c_str = put_str(va_arg(pr, char *));
 				total = total + (c_str - 1);
 			}
+			else
+				total += _putchar(format[i]);
 		}
 	}
 	va_end(pr);
