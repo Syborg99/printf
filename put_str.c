@@ -16,9 +16,9 @@ int put_str(char *s)
 		while (s[num] != '\0')
 		{
 			_putchar(s[num]);
-			num++;
+			num = num + 1;
 		}
 	}
-
 	return (num);
 }
+
