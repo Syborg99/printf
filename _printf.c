@@ -20,30 +20,29 @@ int _printf(const char *format, ...)
 	if (format[0] == '%' && format[1] == ' ' && format[2] == '\0')
 		return (-1);
 
-	for (; format && format[i] != '\0'; i++)
+	for (; format && format[i] != '\0';)
 	{
 		if (format[i] == '%' && format[i + 1] != ' ')
 		{
 			if (format[i + 1] == '%')
 			{
-				_putchar('%');
-				total++;
+				total += _putchar('%');
 			}
 			else if (format[i + 1] == 'c')
 			{
-				_putchar(va_arg(pr, int));
-				total++;
+				total += _putchar(va_arg(pr, int));
 			}
 			else if (format[i + 1] == 's')
 			{
 				c_str = put_str(va_arg(pr, char *));
 				total = total + (c_str - 1);
 			}
+			i += 2;
 		}
 		else
 		{
-			_putchar(format[i]);
-			total++;
+			total += _putchar(format[i]);
+			i++;
 		}
 	}
 	va_end(pr);
