@@ -1,4 +1,7 @@
 #include "main.h"
+#include <stdio.h>
+#include <stdarg.h>
+
 /**
  * _printf - a function that produces output
  *
@@ -14,13 +17,7 @@ int _printf(const char *format, ...)
 
 	va_start(pr, format);
 
-	if (!format || (format[0] == '%' && format[1] == '\0'))
-		return (-1);
-
-	if (format[0] == '%' && format[1] == ' ' && format[2] == '\0')
-		return (-1);
-
-	for (; format && format[i] != '\0';)
+	for (; format[i] != '\0';)
 	{
 		if (format[i] == '%' && format[i + 1] != ' ')
 		{
