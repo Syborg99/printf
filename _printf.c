@@ -38,7 +38,7 @@ int _printf(const char *format, ...)
 			else if (format[i] == 's')
 			{
 				c_str = put_str(va_arg(pr, char *));
-				total = total + (c_str);
+				total = total + (c_str - 1);
 			}
 		}
 		else
