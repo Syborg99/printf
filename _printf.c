@@ -27,10 +27,10 @@ int _printf(const char *format, ...)
 			i++;
 
 			if (format[i] == '%')
-				_putchar('%');
+				total += _putchar('%');
 
 			else if (format[i] == 'c')
-				_putchar(va_arg(pr, int));
+				total += _putchar(va_arg(pr, int));
 
 			else if (format[i] == 's')
 			{
@@ -39,9 +39,7 @@ int _printf(const char *format, ...)
 			}
 		}
 		else
-			_putchar(format[i]);
-
-		total += 1;
+			total += _putchar(format[i]);
 
 	}
 
