@@ -24,25 +24,28 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%' && format[i + 1] != ' ')
 		{
-			i++;
-
-			if (format[i] == '%')
-				total += _putchar('%');
-
-			else if (format[i] == 'c')
-				total += _putchar(va_arg(pr, int));
-
-			else if (format[i] == 's')
+			if (format[i + 1] == '%')
+			{
+				_putchar('%');
+				total++;
+			}
+			else if (format[i + 1] == 'c')
+			{
+				_putchar(va_arg(pr, int));
+				total++;
+			}
+			else if (format[i + 1] == 's')
 			{
 				c_str = put_str(va_arg(pr, char *));
 				total = total + (c_str - 1);
 			}
 		}
 		else
-			total += _putchar(format[i]);
-
+		{
+			_putchar(format[i]);
+			total++;
+		}
 	}
-
 	va_end(pr);
 	return (total);
 }
